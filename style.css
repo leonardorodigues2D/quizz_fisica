@@ -1,3 +1,4 @@
+/* Variáveis CSS para suporte a múltiplos temas */
 :root[data-theme="dark"] {
     --bg-body: #121214;
     --bg-container: #202024;
@@ -42,7 +43,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Fixador do Botão de Alternar Temas */
 .theme-toggle-container {
     position: absolute;
     top: 20px;
@@ -58,10 +58,8 @@ body {
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 500;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Barra de Progresso Animada */
 .progress-bar-container {
     position: fixed;
     top: 0;
@@ -286,6 +284,7 @@ h1 {
     margin-bottom: 15px;
 }
 
+/* Gráfico de Desempenho */
 .chart-container {
     display: flex;
     justify-content: space-around;
@@ -319,7 +318,7 @@ h1 {
 
 .chart-bar-fill {
     width: 100%;
-    height: 0%; /* Controlado dinamicamente pelo JS */
+    height: 0%;
     background-color: var(--primary);
     border-radius: 10px;
     transition: height 0.6s cubic-bezier(0.1, 1, 0.1, 1);

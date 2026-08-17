@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz - Perguntas</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca externa para geração de PDF limpo -->
+    <script src="https://cloudflare.com"></script>
 </head>
 <body>
 
-    <!-- Barra de Progresso Animada no Topo Fixado -->
     <div class="progress-bar-container">
         <div id="progress-bar-fill" class="progress-bar-fill"></div>
     </div>
@@ -26,13 +27,20 @@
         <div class="question" id="question-text">Carregando pergunta...</div>
         
         <div class="options-container" id="options-container">
-            <!-- Gerado via JavaScript -->
+            <!-- Gerado via JavaScript dinamicamente -->
         </div>
 
         <div class="footer">
             <span id="progress">Pergunta 1 de 6</span>
             <button class="btn-next" id="btn-next" onclick="nextQuestion()">Próxima</button>
         </div>
+    </div>
+
+    <!-- Elemento invisível na tela que estruturará o PDF do Gabarito -->
+    <div id="pdf-template" style="display: none; color: #000000; padding: 20px; font-family: Arial, sans-serif;">
+        <h1 style="color: #00828a; border-bottom: 2px solid #00828a; padding-bottom: 10px;">Gabarito Explicativo - Quiz de Física</h1>
+        <p id="pdf-score" style="font-size: 1.2rem; margin-top: 15px; font-weight: bold;"></p>
+        <div id="pdf-questions-list" style="margin-top: 20px;"></div>
     </div>
 
     <script src="script.js"></script>

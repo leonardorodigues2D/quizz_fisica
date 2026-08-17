@@ -21,15 +21,15 @@
             i=f*t | i=Q | Q=m*v | m1*v1+m2*v2=(m1+m2)*vf | Ec=m*v²/2 | ec=Ecf-Eci
         </div>
 
-        <!-- NOVO: Gráfico de Evolução de Notas -->
+        <!-- Gráfico de Evolução de Notas -->
         <div class="stats-box">
             <h3>Gráfico de Desempenho (Evolução)</h3>
             <div id="chart-container" class="chart-container">
-                <!-- As barras do gráfico serão geradas dinamicamente aqui -->
                 <p class="empty-history" id="empty-chart-text">Faça o seu primeiro quiz para ver o gráfico.</p>
             </div>
         </div>
 
+        <!-- Lista de Histórico -->
         <div class="stats-box">
             <h3>Seu Histórico Recente</h3>
             <div id="history-list" class="history-list">
@@ -53,10 +53,10 @@
 
             if (scores.length > 0) {
                 historyList.innerHTML = "";
-                if (emptyChartText) emptyChartText.remove();
+                if (emptyChartText) emptyChartText.style.display = "none";
                 clearBtn.style.display = "inline-block";
                 
-                // 1. Renderizar Histórico (Últimas 4 tentativas)
+                // Renderizar Histórico (Últimas 4 tentativas)
                 scores.slice(-4).reverse().forEach((item, index) => {
                     const div = document.createElement("div");
                     div.classList.add("history-item");
@@ -68,13 +68,11 @@
                     historyList.appendChild(div);
                 });
 
-                // 2. Renderizar Gráfico de Barras Progressivo (Últimas 5 tentativas)
+                // Renderizar Gráfico de Barras (Últimas 5 tentativas)
                 scores.slice(-5).forEach((item, index) => {
                     const percentage = (item.score / item.total) * 100;
-                    
                     const barWrapper = document.createElement("div");
                     barWrapper.classList.add("chart-bar-wrapper");
-                    
                     barWrapper.innerHTML = `
                         <div class="chart-bar-value">${item.score}/${item.total}</div>
                         <div class="chart-bar-track">
