@@ -154,7 +154,7 @@ function saveAndShowResults() {
             <p class="subtitle">Você acertou <strong>${score}</strong> de <strong>${quizData.length}</strong> perguntas.</p>
             <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
                 <button onclick="generateGabaritoPDF()" class="btn-primary" style="background-color: #12a454;">📄 Baixar Gabarito PDF</button>
-                <a href="dashboard.html" class="btn-primary">Voltar ao Painel</a>
+                <a href="index.html"primary">Voltar ao Painel</a>
             </div>
         </div>
     `;
