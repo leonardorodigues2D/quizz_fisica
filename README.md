@@ -9,7 +9,7 @@ Criei esse quiz interativo pra salvar a galera que tá estudando Dinâmica na es
 *   **Modo Escuro / Modo Claro:** Pra não queimar os olhos jogando de madrugada.
 *   **Gabarito em PDF:** No final dá pra baixar um PDF com todas as respostas explicadas pra estudar pra prova.
 
-## 🧠 Fórmulas do Jogo
+##  Fórmulas do Jogo
 *   **Impulso:** i = f * t (Força e tempo) e i = Q (Teorema do Impulso)
 *   **Quantidade de Movimento:** Q = m * v (Massa e velocidade)
 *   **Colisões (Bateu e grudou):** m1 * v1 + m2 * v2 = (m1 + m2) * vf
