@@ -1,0 +1,340 @@
+/* Variáveis CSS para suporte a múltiplos temas */
+:root[data-theme="dark"] {
+    --bg-body: #121214;
+    --bg-container: #202024;
+    --bg-box: #29292e;
+    --bg-hover: #323238;
+    --text-main: #e1e1e6;
+    --text-sub: #a8a8b3;
+    --text-muted: #7c7c8a;
+    --primary: #00adb5;
+    --primary-hover: #00828a;
+    --border-color: #323238;
+}
+
+:root[data-theme="light"] {
+    --bg-body: #f0f2f5;
+    --bg-container: #ffffff;
+    --bg-box: #f1f3f5;
+    --bg-hover: #e2e6ea;
+    --text-main: #212529;
+    --text-sub: #495057;
+    --text-muted: #6c757d;
+    --primary: #00828a;
+    --primary-hover: #00666d;
+    --border-color: #dee2e6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Fixador do Botão de Alternar Temas */
+.theme-toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-theme {
+    background-color: var(--bg-container);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Barra de Progresso Animada */
+.progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: var(--bg-box);
+    z-index: 1000;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary);
+    transition: width 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.quiz-container {
+    background-color: var(--bg-container);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.text-center {
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.subtitle {
+    color: var(--text-sub);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.formula-box {
+    background-color: var(--bg-box);
+    padding: 12px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+
+.font-small {
+    font-size: 0.8rem;
+}
+
+.stats-box {
+    background-color: var(--bg-box);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.stats-box h3 {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    background-color: var(--bg-container);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary);
+}
+
+.history-item small {
+    color: var(--text-muted);
+}
+
+.empty-history {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.question {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-option {
+    background-color: var(--bg-box);
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-option:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--primary);
+}
+
+.btn-option.correct {
+    background-color: #12a454;
+    border-color: #12a454;
+    color: #ffffff;
+}
+
+.btn-option.wrong {
+    background-color: #e52e4d;
+    border-color: #e52e4d;
+    color: #ffffff;
+}
+
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.header-navigation {
+    margin-bottom: 15px;
+}
+
+.btn-back {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.btn-back:hover {
+    color: var(--primary);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #e52e4d;
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.btn-next {
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: none;
+}
+
+.btn-next:hover {
+    background-color: var(--primary-hover);
+}
+
+.score-container {
+    text-align: center;
+}
+
+.score-container h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 150px;
+    padding: 15px 10px 5px 10px;
+    background-color: var(--bg-container);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-top: 5px;
+}
+
+.chart-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 45px;
+}
+
+.chart-bar-track {
+    width: 16px;
+    height: 90px;
+    background-color: var(--bg-box);
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.chart-bar-fill {
+    width: 100%;
+    height: 0%; /* Controlado dinamicamente pelo JS */
+    background-color: var(--primary);
+    border-radius: 10px;
+    transition: height 0.6s cubic-bezier(0.1, 1, 0.1, 1);
+}
+
+.chart-bar-value {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.chart-bar-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+}

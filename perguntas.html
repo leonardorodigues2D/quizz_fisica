@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Perguntas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Barra de Progresso Animada no Topo Fixado -->
+    <div class="progress-bar-container">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+    </div>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="btn-theme" onclick="toggleTheme()">☀️ Modo Claro</button>
+    </div>
+
+    <div class="quiz-container fade-in" id="quiz">
+        <div class="header-navigation">
+            <a href="dashboard.html" class="btn-back">← Voltar ao Painel</a>
+        </div>
+        
+        <div class="formula-box" id="formula-display">Fórmula associada: ...</div>
+        <div class="question" id="question-text">Carregando pergunta...</div>
+        
+        <div class="options-container" id="options-container">
+            <!-- Gerado via JavaScript -->
+        </div>
+
+        <div class="footer">
+            <span id="progress">Pergunta 1 de 6</span>
+            <button class="btn-next" id="btn-next" onclick="nextQuestion()">Próxima</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

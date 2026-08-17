@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Quiz de Física</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="btn-theme" onclick="toggleTheme()">☀️ Modo Claro</button>
+    </div>
+
+    <div class="quiz-container text-center fade-in">
+        <h1>Painel do Estudante</h1>
+        <p class="subtitle">Bem-vindo ao simulador de Dinâmica e Colisões.</p>
+        
+        <div class="formula-box font-small">
+            <strong>Fórmulas inclusas:</strong><br>
+            i=f*t | i=Q | Q=m*v | m1*v1+m2*v2=(m1+m2)*vf | Ec=m*v²/2 | ec=Ecf-Eci
+        </div>
+
+        <!-- NOVO: Gráfico de Evolução de Notas -->
+        <div class="stats-box">
+            <h3>Gráfico de Desempenho (Evolução)</h3>
+            <div id="chart-container" class="chart-container">
+                <!-- As barras do gráfico serão geradas dinamicamente aqui -->
+                <p class="empty-history" id="empty-chart-text">Faça o seu primeiro quiz para ver o gráfico.</p>
+            </div>
+        </div>
+
+        <div class="stats-box">
+            <h3>Seu Histórico Recente</h3>
+            <div id="history-list" class="history-list">
+                <p class="empty-history">Nenhum teste realizado ainda.</p>
+            </div>
+            <button class="btn-secondary" id="btn-clear" onclick="clearHistory()" style="display: none;">Limpar Histórico</button>
+        </div>
+
+        <div class="dashboard-actions">
+            <a href="perguntas.html" class="btn-primary">Iniciar Quiz Completo</a>
+        </div>
+    </div>
+
+    <script>
+        function loadHistoryAndChart() {
+            const historyList = document.getElementById("history-list");
+            const chartContainer = document.getElementById("chart-container");
+            const emptyChartText = document.getElementById("empty-chart-text");
+            const clearBtn = document.getElementById("btn-clear");
+            const scores = JSON.parse(localStorage.getItem("physics_quiz_scores")) || [];
+
+            if (scores.length > 0) {
+                historyList.innerHTML = "";
+                if (emptyChartText) emptyChartText.remove();
+                clearBtn.style.display = "inline-block";
+                
+                // 1. Renderizar Histórico (Últimas 4 tentativas)
+                scores.slice(-4).reverse().forEach((item, index) => {
+                    const div = document.createElement("div");
+                    div.classList.add("history-item");
+                    div.innerHTML = `
+                        <span>Tentativa ${scores.length - index}</span>
+                        <strong>${item.score} / ${item.total} acertos</strong>
+                        <small>${item.date}</small>
+                    `;
+                    historyList.appendChild(div);
+                });
+
+                // 2. Renderizar Gráfico de Barras Progressivo (Últimas 5 tentativas)
+                scores.slice(-5).forEach((item, index) => {
+                    const percentage = (item.score / item.total) * 100;
+                    
+                    const barWrapper = document.createElement("div");
+                    barWrapper.classList.add("chart-bar-wrapper");
+                    
+                    barWrapper.innerHTML = `
+                        <div class="chart-bar-value">${item.score}/${item.total}</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill" style="height: ${percentage}%"></div>
+                        </div>
+                        <div class="chart-bar-label">T-${index + 1}</div>
+                    `;
+                    chartContainer.appendChild(barWrapper);
+                });
+            }
+        }
+
+        function clearHistory() {
+            localStorage.removeItem("physics_quiz_scores");
+            location.reload();
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+            const btn = document.getElementById("theme-toggle");
+            if (btn) btn.innerText = savedTheme === "dark" ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            document.getElementById("theme-toggle").innerText = newTheme === "dark" ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadHistoryAndChart();
+            initTheme();
+        });
+    </script>
+</body>
+</html>
