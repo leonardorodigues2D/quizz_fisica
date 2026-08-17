@@ -1,4 +1,4 @@
-/* Variáveis CSS para suporte a múltiplos temas */
+
 :root[data-theme="dark"] {
     --bg-body: #121214;
     --bg-container: #202024;
