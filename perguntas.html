@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz - Perguntas</title>
     <link rel="stylesheet" href="style.css">
-    <!-- CORRIGIDO: Importação da biblioteca html2pdf está certa agora -->
-    <script src="https://cloudflare.com"></script>
+    <!-- Servidor CDN super estável e compatível com a Vercel -->
+    <script src="https://jsdelivr.net"></script>
 </head>
 <body>
 
@@ -20,7 +20,6 @@
 
     <div class="quiz-container fade-in" id="quiz">
         <div class="header-navigation">
-            <!-- CORRIGIDO: Tag de link consertada e fechada corretamente com classe CSS -->
             <a href="index.html" class="btn-back">← Voltar ao Painel</a>
         </div>
         
@@ -37,11 +36,11 @@
         </div>
     </div>
 
-    <!-- Elemento invisível na tela que estruturará o PDF do Gabarito -->
-    <div id="pdf-template" style="display: none; color: #000000; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- Elemento visível apenas para o gerador de PDF, com cores fixas claras para impressão -->
+    <div id="pdf-template" style="display: none; background-color: #ffffff; color: #000000; padding: 20px; font-family: Arial, sans-serif;">
         <h1 style="color: #00828a; border-bottom: 2px solid #00828a; padding-bottom: 10px;">Gabarito Explicativo - Quiz de Física</h1>
-        <p id="pdf-score" style="font-size: 1.2rem; margin-top: 15px; font-weight: bold;"></p>
-        <div id="pdf-questions-list" style="margin-top: 20px;"></div>
+        <p id="pdf-score" style="font-size: 1.2rem; margin-top: 15px; font-weight: bold; color: #000000;"></p>
+        <div id="pdf-questions-list" style="margin-top: 20px; color: #000000;"></div>
     </div>
 
     <script src="script.js"></script>

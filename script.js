@@ -164,12 +164,18 @@ function saveAndShowResults() {
 function generateGabaritoPDF() {
     const scoreText = document.getElementById("pdf-score");
     const questionsList = document.getElementById("pdf-questions-list");
+    const element = document.getElementById("pdf-template");
     
+    if (!scoreText || !questionsList || !element) {
+        alert("Erro técnico: Elementos do PDF não encontrados na página.");
+        return;
+    }
+
     scoreText.innerText = `Resultado Final: ${score} de ${quizData.length} acertos.`;
     questionsList.innerHTML = "";
 
     quizData.forEach((q, index) => {
-        const userSelection = userAnswers[index];
+        const userSelection = userAnswers[index] !== undefined ? userAnswers[index] : 0;
         const isCorrect = userSelection === q.correct;
         
         const qDiv = document.createElement("div");
@@ -177,35 +183,36 @@ function generateGabaritoPDF() {
         qDiv.style.padding = "10px";
         qDiv.style.borderLeft = isCorrect ? "4px solid #12a454" : "4px solid #e52e4d";
         qDiv.style.backgroundColor = "#f8f9fa";
+        qDiv.style.color = "#000000";
 
         qDiv.innerHTML = `
-            <h4 style="margin: 0 0 8px 0;">Pergunta ${index + 1}: ${q.question}</h4>
-            <p style="margin: 4px 0; font-size: 0.9rem;"><strong>Sua resposta:</strong> ${q.options[userSelection]} ${isCorrect ? '✅' : '❌'}</p>
-            <p style="margin: 4px 0; font-size: 0.9rem;"><strong>Resposta correta:</strong> ${q.options[q.correct]}</p>
+            <h4 style="margin: 0 0 8px 0; color: #000000;">Pergunta ${index + 1}: ${q.question}</h4>
+            <p style="margin: 4px 0; font-size: 0.9rem; color: #000000;"><strong>Sua resposta:</strong> ${q.options[userSelection]} ${isCorrect ? '✅' : '❌'}</p>
+            <p style="margin: 4px 0; font-size: 0.9rem; color: #000000;"><strong>Resposta correta:</strong> ${q.options[q.correct]}</p>
             <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: #555555; font-style: italic;"><strong>Explicação:</strong> ${q.explanation}</p>
         `;
         questionsList.appendChild(qDiv);
     });
 
-    const element = document.getElementById("pdf-template");
-    element.style.display = "block"; // Ativa temporariamente para captura
+    // Torna visível temporariamente para o html2pdf conseguir ler na Vercel
+    element.style.display = "block"; 
 
     const opt = {
         margin:       10,
         filename:     'gabarito_quiz_fisica.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
+        html2canvas:  { scale: 2, useCORS: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
-        element.style.display = "none"; // Oculta novamente após salvar
-    });
+    // Executa a geração do arquivo
+    html2pdf().set(opt).from(element).save()
+        .then(() => {
+            element.style.display = "none"; // Esconde de volta após o término
+        })
+        .catch((err) => {
+            element.style.display = "none";
+            alert("Não foi possível gerar o arquivo. Tente usar uma aba anônima.");
+            console.error(err);
+        });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
-    if (questionText) {
-        loadQuestion();
-    }
-});
